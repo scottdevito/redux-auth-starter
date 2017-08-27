@@ -1,4 +1,4 @@
-import { fetchBelts, selectBelt, fetchBeltImages } from './action-belts';
+import { fetchSomething, selectSomething } from './action-fetch';
 import {
   login,
   register,
@@ -8,9 +8,8 @@ import {
 } from './action-login';
 
 export {
-  fetchBelts,
-  selectBelt,
-  fetchBeltImages,
+  fetchSomething,
+  selectSomething,
   login,
   register,
   logout,

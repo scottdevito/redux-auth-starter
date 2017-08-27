@@ -11,7 +11,7 @@ import {
 } from './types';
 import firebase from 'firebase';
 import database from '../startup/db';
-import { fetchBelts, fetchBeltImages } from '../actions/index';
+import { fetchSomething } from '../actions/index';
 
 const Users = database.ref().child('users');
 
@@ -25,8 +25,7 @@ const login = ({ email, password }) => {
           dispatch({ type: LOGIN_SUCCESS, payload: { user } });
           dispatch({ type: SET_USER_AUTH_INFO, payload: { user } });
           dispatch(setUserDbInfo(email));
-          dispatch(fetchBelts());
-          dispatch(fetchBeltImages());
+          dispatch(fetchSomething());
           resolve(user);
         })
         .catch(error => {
@@ -48,8 +47,7 @@ const register = ({ email, password }) => {
           dispatch({ type: SET_USER_AUTH_INFO, payload: { user } });
           dispatch(setUserDbInfo(email));
           dispatch({ type: REGISTER_SUCCESS, payload: { user } });
-          dispatch(fetchBelts());
-          dispatch(fetchBeltImages());
+          dispatch(fetchSomething());
           resolve(user);
         })
         .catch(error => {
@@ -116,8 +114,7 @@ const loginPersist = user => {
     dispatch({ type: LOGIN_SUCCESS, payload: { user } });
     dispatch({ type: SET_USER_AUTH_INFO, payload: { user } });
     dispatch(setUserDbInfo(user.email));
-    dispatch(fetchBelts());
-    dispatch(fetchBeltImages());
+    dispatch(fetchSomething());
   };
 };
 

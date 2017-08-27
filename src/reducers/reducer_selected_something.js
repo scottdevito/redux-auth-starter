@@ -1,8 +1,8 @@
-import { BELT_SELECTED } from "../actions/types";
+import { SOMETHING_SELECTED } from '../actions/types';
 
 export default function(state = null, action) {
   switch (action.type) {
-    case BELT_SELECTED:
+    case SOMETHING_SELECTED:
       return action.payload;
     default:
       return state;

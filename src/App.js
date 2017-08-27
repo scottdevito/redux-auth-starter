@@ -1,19 +1,41 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+} from 'react-router-dom';
+import './styles/App.css';
+import LoginStatus from './components/auth/login_status';
+import Welcome from './components/welcome';
+
+import firebase from 'firebase';
 
 class App extends Component {
+  componentWillMount() {
+    // Listen for Auth Changes
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.props.loginPersist(user);
+      } else {
+        this.props.logout();
+      }
+    });
+  }
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <Router>
+        <div className="app">
+          <Route
+            exact={true}
+            path="/"
+            render={() =>
+              this.props.loggedIn ? <Redirect to="/auth-route" /> : <Welcome />}
+          />
+          <Route path="/auth-route" component={LoginStatus} />
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      </Router>
     );
   }
 }
